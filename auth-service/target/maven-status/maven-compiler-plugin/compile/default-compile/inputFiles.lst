@@ -1,1 +1,15 @@
 C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\AuthServiceApplication.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\security\AuthEntryPointJwt.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\security\UserDetailsServiceImpl.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\dto\JwtResponse.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\security\UserDetailsImpl.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\security\AuthTokenFilter.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\dto\LoginRequest.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\security\JwtUtils.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\entity\User.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\service\AuthService.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\controller\AuthController.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\config\WebSecurityConfig.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\entity\Role.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\repository\UserRepository.java
+C:\Users\dell1\codearena\auth-service\src\main\java\com\codearena\auth_service\dto\SignupRequest.java
