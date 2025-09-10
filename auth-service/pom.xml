@@ -6,16 +6,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.5</version>
-        <relativePath/> <!-- use latest version -->
+        <groupId>com.codearena</groupId>
+        <artifactId>codearena-parent</artifactId>
+        <version>1.0.0</version>
     </parent>
 
-    <groupId>com.codearena</groupId>
     <artifactId>auth-service</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
 
     <properties>
         <java.version>17</java.version>
@@ -57,12 +53,6 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!-- Jakarta Validation API -->
-        <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
             <version>3.0.2</version>
@@ -70,19 +60,10 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.28</version> <!-- latest stable -->
+            <version>1.18.28</version>
             <scope>provided</scope>
         </dependency>
-
-
     </dependencies>
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-    </repositories>
-
 
     <build>
         <plugins>
