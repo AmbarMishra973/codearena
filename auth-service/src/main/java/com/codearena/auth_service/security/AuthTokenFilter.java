@@ -30,10 +30,15 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
+        String headerAuth = request.getHeader("Authorization");
+        System.out.println("Authorization Header: " + headerAuth);
+
         try {
             String jwt = parseJwt(request);
+            System.out.println("Parsed JWT: " + jwt);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUsernameFromJwtToken(jwt);
+                System.out.println("JWT Username: " + username);
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication =
@@ -51,6 +56,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+
 
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
