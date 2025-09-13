@@ -33,12 +33,11 @@ public class WebSecurityConfig {
                                                        PasswordEncoder passwordEncoder,
                                                        UserDetailsService userDetailsService)
             throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder)
-                .and()
-                .build();
+        AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+        return builder.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -52,9 +51,11 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/", "/api/auth/**", "/actuator/**").permitAll()  // 👈 added "/" and actuator
+                        .requestMatchers("/actuator/**").permitAll()
                         .anyRequest().authenticated()
                 );
+
 
         http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
