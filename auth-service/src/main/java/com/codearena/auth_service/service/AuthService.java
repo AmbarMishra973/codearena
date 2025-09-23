@@ -1,5 +1,9 @@
 package com.codearena.auth_service.service;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 import com.codearena.auth_service.dto.*;
 import com.codearena.auth_service.entity.Role;
 import com.codearena.auth_service.entity.User;
@@ -7,7 +11,6 @@ import com.codearena.auth_service.repository.UserRepository;
 import com.codearena.auth_service.security.JwtUtils;
 import com.codearena.auth_service.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,16 +44,19 @@ public class AuthService {
 
     public JwtResponse authenticateUser(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtUtils.generateJwtToken(authentication.getName());
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        String jwt = jwtUtils.generateJwtToken(userDetails.getUsername());
 
         return new JwtResponse(jwt,
-                "Bearer",
+                userDetails.getId(),
                 userDetails.getUsername(),
-                userDetails.getAuthorities().iterator().next().getAuthority());
+                userDetails.getEmail(),
+                userDetails.getAuthorities());
     }
 }
