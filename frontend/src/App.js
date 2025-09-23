@@ -1,14 +1,18 @@
-import React from 'react';
-import './App.css';
-import CodeEditor from './CodeEditor';
+import React, { useState } from 'react';
+import Timer from './components/Timer';  // Make sure the Timer component exists
+import Leaderboard from './components/Leaderboard';  // Ensure this is correctly implemented
 
 function App() {
-  return (
-    <div className="App">
-      <h1>CodeArena - Submit Code</h1>
-      <CodeEditor problemId={1} language="java" userId={1} />
-    </div>
-  );
+    const [contestId, setContestId] = useState(1);  // Example contest ID
+    const [endTime, setEndTime] = useState(new Date('2025-12-31T23:59:59'));  // Example end time
+
+    return (
+        <div className="App">
+            <h1>CodeArena Contest</h1>
+            <Timer endTime={endTime} />
+            <Leaderboard contestId={contestId} />
+        </div>
+    );
 }
 
 export default App;
