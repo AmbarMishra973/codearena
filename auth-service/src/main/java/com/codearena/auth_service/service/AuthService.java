@@ -43,8 +43,9 @@ public class AuthService {
     }
 
     public JwtResponse authenticateUser(LoginRequest loginRequest) {
+        // Update the authentication logic to use email instead of username
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()) // Use email here
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
