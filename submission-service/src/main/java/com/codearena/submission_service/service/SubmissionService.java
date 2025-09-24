@@ -1,49 +1,61 @@
 package com.codearena.submission_service.service;
 
-import org.springframework.stereotype.Service;
+import com.codearena.submission_service.dto.*;
+import com.codearena.submission_service.model.Submission;
+import com.codearena.contest_service.model.Contest;
+import com.codearena.contest_service.repository.ContestRepository;
+import com.codearena.submission_service.repository.SubmissionRepository;
+import com.codearena.plagiarism_service.PlagiarismService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-
-import com.codearena.submission_service.repository.SubmissionRepository;
-import com.codearena.submission_service.model.Submission;
-import com.codearena.submission_service.dto.SubmissionRequest;
-import com.codearena.submission_service.dto.SubmissionResponse;
-import com.codearena.submission_service.dto.Judge0Response;
 
 @Service
 public class SubmissionService {
 
     @Autowired
-    private SubmissionRepository repository;
+    private SubmissionRepository submissionRepository;
 
     @Autowired
-    private Judge0Client judge0Client;
+    private ContestRepository contestRepository;
 
+    @Autowired
+    private PlagiarismService plagiarismService;  // Injecting PlagiarismService
+
+    // Submit code to contest
     public SubmissionResponse submitCode(SubmissionRequest request) {
-        // Call Judge0
-        Judge0Response result = judge0Client.execute(request);
+        // Fetch the contest by its ID
+        Contest contest = contestRepository.findById(request.getContestId()).orElseThrow(
+                () -> new RuntimeException("Contest not found")
+        );
 
-        // Map result and save to DB
+        // Check if the contest has ended
+        if (contest.getEndTime().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("This contest has ended. No more submissions allowed.");
+        }
+
+        // Process submission
         Submission submission = new Submission();
         submission.setUserId(request.getUserId());
         submission.setProblemId(request.getProblemId());
         submission.setCode(request.getCode());
         submission.setLanguage(request.getLanguage());
-        submission.setVerdict(result.getStatus());
-        submission.setRuntime(result.getTime());
-        submission.setMemory(result.getMemory());
         submission.setSubmittedAt(LocalDateTime.now());
 
-        repository.save(submission);
+        // Check for plagiarism
+        double similarityPercentage = plagiarismService.checkPlagiarism(request.getCode());
+        if (plagiarismService.isSuspicious(similarityPercentage)) {
+            // Flag as suspicious if similarity exceeds the threshold
+            submission.setVerdict("Suspicious - Possible Plagiarism");
+        } else {
+            submission.setVerdict("Accepted");
+        }
 
-        // Prepare response
-        SubmissionResponse response = new SubmissionResponse();
-        response.setVerdict(result.getStatus());
-        response.setRuntime(result.getTime());
-        response.setMemory(result.getMemory());
-        response.setOutput(result.getStdout());
-        response.setError(result.getStderr());
-        return response;
+        // Save submission to DB
+        submissionRepository.save(submission);
+
+        // Return response
+        return new SubmissionResponse("Submission received", submission.getId(), submission.getVerdict());
     }
 }
