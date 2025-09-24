@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -22,7 +23,8 @@ public class UserDetailsImpl implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserDetailsImpl build(User user) {
-        List<GrantedAuthority> authorities = List.of(
+        // Using Arrays.asList instead of List.of for older Java versions
+        List<GrantedAuthority> authorities = Arrays.asList(
                 new SimpleGrantedAuthority("ROLE_" + user.getRole().name())
         );
 
