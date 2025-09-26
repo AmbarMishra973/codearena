@@ -83,32 +83,42 @@
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- Contest Service Dependency -->
         <dependency>
             <groupId>com.codearena</groupId>
             <artifactId>contest-service</artifactId>
-            <version>1.0.0</version>  <!-- Make sure to use the correct version -->
+            <version>1.0.0</version> <!-- Make sure to use the correct version -->
         </dependency>
+
+        <!-- Auth Service Dependency -->
         <dependency>
             <groupId>com.codearena</groupId>
             <artifactId>auth-service</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.codearena</groupId>
-            <artifactId>auth-service</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
-        </dependency>
+
+        <!-- Problem Service Dependency -->
         <dependency>
             <groupId>com.codearena</groupId>
             <artifactId>problem-service</artifactId>
-            <version>1.0.0</version>  <!-- Ensure the correct version -->
+            <version>1.0.0</version> <!-- Ensure the correct version -->
         </dependency>
+
+        <!-- Mockito for unit testing -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.0.0</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
+            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -116,5 +126,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>
