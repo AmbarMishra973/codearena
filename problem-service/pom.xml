@@ -19,30 +19,29 @@
     <properties>
         <java.version>17</java.version>
     </properties>
-
-<dependencies>
-    <!-- Spring Web -->
+    <dependencies>
+        <!-- Spring Web Starter for building REST APIs -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>3.1.5</version>
         </dependency>
 
-        <!-- Spring Data JPA -->
+        <!-- Spring Data JPA for database interaction -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>3.1.5</version>
         </dependency>
 
-        <!-- Jakarta Persistence -->
+        <!-- Jakarta Persistence for JPA 3.x -->
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
             <version>3.1.0</version>
         </dependency>
 
-        <!-- Lombok -->
+        <!-- Lombok for reducing boilerplate code -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -57,12 +56,57 @@
             <version>2.1.214</version>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- Spring Boot Actuator for monitoring (optional) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!-- Spring Boot Starter Test for unit testing -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito for mocking dependencies in unit tests -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.0.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Testcontainers for integration testing (optional, for Docker-based tests) -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>1.17.3</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Spring Boot Maven Plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.3.3</version>
+            </plugin>
+
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
