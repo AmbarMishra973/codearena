@@ -1,6 +1,7 @@
 package com.codearena.problem_service.mapper;
 
-import com.codearena.problem_service.dto.*;
+import com.codearena.problem_service.dto.ProblemRequest;
+import com.codearena.problem_service.dto.ProblemResponse;
 import com.codearena.problem_service.entity.Problem;
 
 public class ProblemMapper {
