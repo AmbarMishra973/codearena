@@ -5,7 +5,7 @@ import com.codearena.submission_service.model.Submission;
 import com.codearena.contest_service.model.Contest;
 import com.codearena.contest_service.repository.ContestRepository;
 import com.codearena.submission_service.repository.SubmissionRepository;
-import com.codearena.plagiarism_service.PlagiarismService;
+import com.codearena.plagiarism_service.service.PlagiarismService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
