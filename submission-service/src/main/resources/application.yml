@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: submission-service  # Name of the submission service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/submission-db
+    username: submission_user
+    password: submission_password
+    driver-class-name: org.postgresql.Driver
+  cloud:
+    discovery:
+      enabled: true
+    eureka:
+      client:
+        service-url:
+          defaultZone: http://localhost:8761/eureka  # Eureka server URL
+
+server:
+  port: 8084  # Submission service runs on port 8084
