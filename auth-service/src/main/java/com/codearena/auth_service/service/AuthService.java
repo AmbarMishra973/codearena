@@ -4,7 +4,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import com.codearena.auth_service.dto.*;
+import com.codearena.codearena_common.dto.*;
 import com.codearena.auth_service.entity.Role;
 import com.codearena.auth_service.entity.User;
 import com.codearena.auth_service.repository.UserRepository;
