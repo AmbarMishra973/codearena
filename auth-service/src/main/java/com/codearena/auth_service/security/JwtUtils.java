@@ -19,15 +19,21 @@ public class JwtUtils {
     @Value("${codearena.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    // internal helper to build signing key from secret
+    public void setJwtSecret(String jwtSecret) {
+        this.jwtSecret = jwtSecret;
+    }
+
+    public void setJwtExpirationMs(int jwtExpirationMs) {
+        this.jwtExpirationMs = jwtExpirationMs;
+    }
+
+    // Internal helper to build signing key from secret
     private Key getSigningKey() {
         byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-
-    // overloaded: generate token directly from username (handy for signup auto-login)
-    // Existing one (Authentication)
+    // Overloaded: Generate token directly from username
     public String generateJwtToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
         return generateJwtToken(userPrincipal.getUsername());
@@ -46,8 +52,7 @@ public class JwtUtils {
                 .compact();
     }
 
-
-    // extract username (subject) from token
+    // Extract username (subject) from token
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
@@ -57,7 +62,7 @@ public class JwtUtils {
                 .getSubject();
     }
 
-    // validate token (signature + expiry)
+    // Validate token (signature + expiry)
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(authToken);
