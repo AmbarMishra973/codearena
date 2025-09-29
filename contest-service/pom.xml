@@ -37,47 +37,19 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Jakarta Persistence API for JPA 3.x -->
-        <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <!-- Lombok for reducing boilerplate code -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.28</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Spring Boot WebSocket for real-time leaderboard updates -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
-
-        <!-- Spring Boot Actuator for monitoring (optional) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <!-- Problem Service Dependency -->
-        <dependency>
-            <groupId>com.codearena</groupId>
-            <artifactId>problem-service</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <!-- Spring Boot Starter WebFlux (optional) -->
+        <!-- Spring Boot Starter WebFlux (optional for WebClient) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
-        <!-- Spring Boot Starter Test for unit testing -->
+        <!-- Spring Boot WebSocket Starter (required for WebSocket annotations) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -92,7 +64,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Testcontainers for integration testing (optional, for Docker-based tests) -->
+        <!-- Testcontainers for integration testing (optional) -->
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
@@ -100,25 +72,47 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- H2 Database for in-memory testing -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
 
+        <!-- Spring Cloud Starter OpenFeign (optional, if using Feign for communication between services) -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Starter Web (required for creating REST APIs) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
     </dependencies>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2020.0.5</version> <!-- Or use the latest stable version -->
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
-            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.3.3</version>
             </plugin>
-
-            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -129,5 +123,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
