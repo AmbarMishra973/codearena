@@ -4,6 +4,7 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Parent POM for the project -->
     <parent>
         <groupId>com.codearena</groupId>
         <artifactId>codearena-parent</artifactId>
@@ -13,7 +14,141 @@
     <artifactId>gateway-service</artifactId>
 
     <dependencies>
-        <!-- Add Spring Boot and other dependencies here later -->
+        <!-- Spring Boot Starter Web (For general web support) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Spring Cloud Gateway (For routing and proxying API requests) -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+
+        <!-- Eureka Client (To register the gateway with Eureka for service discovery) -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Actuator (Optional but useful for monitoring and managing the application) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Starter Test (For unit and integration testing) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- Add the dependency for codearena-common -->
+        <dependency>
+            <groupId>com.codearena</groupId>
+            <artifactId>codearena-common</artifactId>
+            <version>1.0.0</version> <!-- Version of codearena-common -->
+        </dependency>
+        <dependency>
+            <groupId>com.codearena</groupId>
+            <artifactId>codearena-common</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Dependency for auth-service -->
+        <dependency>
+            <groupId>com.codearena</groupId>
+            <artifactId>auth-service</artifactId>
+            <version>1.0.0</version> <!-- Replace with actual version -->
+        </dependency>
+
+        <!-- Dependency for contest-service -->
+        <dependency>
+            <groupId>com.codearena</groupId>
+            <artifactId>contest-service</artifactId>
+            <version>1.0.0</version> <!-- Replace with actual version -->
+        </dependency>
+
+        <!-- Dependency for problem-service -->
+        <dependency>
+            <groupId>com.codearena</groupId>
+            <artifactId>problem-service</artifactId>
+            <version>1.0.0</version> <!-- Replace with actual version -->
+        </dependency>
+
+        <!-- Dependency for submission-service -->
+        <dependency>
+            <groupId>com.codearena</groupId>
+            <artifactId>submission-service</artifactId>
+            <version>1.0.0</version> <!-- Replace with actual version -->
+        </dependency>
+
+        <!-- Dependency for user-service -->
+        <dependency>
+            <groupId>com.codearena</groupId>
+            <artifactId>user-service</artifactId>
+            <version>1.0.0</version> <!-- Replace with actual version -->
+        </dependency>
+
+        <!-- Dependency for plagiarism-service -->
+        <dependency>
+            <groupId>com.codearena</groupId>
+            <artifactId>plagiarism-service</artifactId>
+            <version>1.0.0</version> <!-- Replace with actual version -->
+        </dependency>
+
+        <!-- Dependency for rating-service -->
+        <dependency>
+            <groupId>com.codearena</groupId>
+            <artifactId>rating-service</artifactId>
+            <version>1.0.0</version> <!-- Replace with actual version -->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>submission-service</artifactId>
+            <version>3.1.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.codearena</groupId>
+            <artifactId>admin-service</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Cloud BOM (for managing versions) -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2020.0.5</version> <!-- Update to the latest stable version -->
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <properties>
+        <java.version>11</java.version> <!-- Ensure the Java version matches your environment -->
+        <spring-boot.version>2.5.4</spring-boot.version> <!-- Adjust Spring Boot version if necessary -->
+    </properties>
+
+    <build>
+        <plugins>
+            <!-- Maven Plugin for Spring Boot -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
